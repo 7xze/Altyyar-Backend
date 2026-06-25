@@ -233,6 +233,16 @@ altyyar-backend/
 │   ├── migrate/                      # تهجيرات
 │   └── schema.rb                     # هيكل DB
 │
+├── marketplace-rs/                   # 🆕 سوق الخدمات (Rust/Axum)
+│   ├── src/                          # كود Rust
+│   │   ├── main.rs                   # نقطة الدخول
+│   │   ├── handlers/                 # HTTP handlers
+│   │   ├── models/                   # Domain entities
+│   │   ├── repository/               # Database queries
+│   │   └── middleware/               # Auth middleware
+│   ├── migrations/                   # PostgreSQL migrations
+│   └── Cargo.toml                    # Rust dependencies
+│
 ├── streaming/                        # خادم البث (Node.js)
 │   ├── index.js                      # نقطة الدخول
 │   ├── redis.js                      # اتصال Redis
@@ -365,13 +375,31 @@ SMTP_FROM_ADDRESS=tayyar@example.com
 
 ---
 
+## سوق تيار | Tayyar Marketplace
+
+السوق منصة لبيع وشراء الخدمات التصميمية بين المصممين العرب، مبنية بلغة **Rust** كخدمة مصغرة (microservice).
+
+**GitHub**: مدمج في هذا المستودع تحت `marketplace-rs/`
+
+### المميزات
+- **خدمات** — نشر وإدارة خدمات التصميم (تصميم، تصوير، تعديل)
+- **سلة تسوق** — إضافة/إزالة خدمات، تعديل الكميات
+- **طلبات** — إنشاء طلب من السلة، تتبع الحالة
+- **مدفوعات** — دفع آمن عبر Moyasar (يدعم Mada, Visa, Mastercard, Apple Pay)
+- **مصادقة** — عبر توكن Mastodon OAuth نفسه
+
+### التوثيق الكامل
+→ راجع [marketplace-rs/README.md](marketplace-rs/README.md) للتوثيق الكامل والفني.
+
+---
+
 ## التطبيق الأمامي | Frontend App
 
-التطبيق الأمامي لتطبيق تيار مخصص لمنصة Android، يمكنك الوصول إليه عبر:
+التطبيق الأمامي لتطبيق تيار مخصص لمنصة Android:
 
 **GitHub**: [Altyyar-Android-app](https://github.com/7xze/Altyyar-Android-app-main)
 
-The Tayyar Android frontend app can be found at the repository above.
+لربط التطبيق بالسوق، سيحتاج التطبيق إضافة API interface جديدة تشير إلى endpoints السوق.
 
 ---
 

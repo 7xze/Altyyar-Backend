@@ -135,6 +135,26 @@ services:
   #     - external_network
   #     - internal_network
 
+  marketplace:
+    build:
+      context: ./marketplace-rs
+    restart: always
+    ports:
+      - '8080:8080'
+    environment:
+      - PORT=8080
+      - DATABASE_URL=postgres://postgres@db:5432/tayyar_marketplace
+      - MASTODON_API_BASE=http://web:3000
+      - MOYASAR_SECRET_KEY=${MOYASAR_SECRET_KEY}
+      - MOYASAR_PUBLISHABLE_KEY=${MOYASAR_PUBLISHABLE_KEY}
+      - ENVIRONMENT=production
+      - RUST_LOG=info
+    networks:
+      - internal_network
+    depends_on:
+      - db
+      - web
+
 networks:
   external_network:
   internal_network:
